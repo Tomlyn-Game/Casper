@@ -75,10 +75,29 @@ public class JsonWrapper implements IJsonSerializable {
     }
 
     public <T extends Enum<T>> T GetEnum(Class<T> clazz, String path, T def) {
-        String str = GetString(path, def.toString());
+        String str = GetString(path, def == null ? null : def.toString());
         if (str == null) return null;
 
-        return Enum.valueOf(clazz, str);
+        // First, try a case-insensitive match.
+        T caseInsensitiveMatch = null;
+        for (T enumConstant : clazz.getEnumConstants()) {
+            if (enumConstant.name().equalsIgnoreCase(str)) {
+                caseInsensitiveMatch = enumConstant;
+                // If there's an exact case match, return it immediately
+                if (enumConstant.name().equals(str)) {
+                    return enumConstant;
+                }
+            }
+        }
+
+        // If a case-insensitive match is found but no exact match, return the case-insensitive match
+        if (caseInsensitiveMatch != null) {
+            return caseInsensitiveMatch;
+        }
+
+        // Log and return default if no match is found
+        log.warn("Invalid enum value: {}", str);
+        return def;
     }
 
     public int GetInt(String path, int def) {
@@ -175,6 +194,10 @@ public class JsonWrapper implements IJsonSerializable {
         return ResolvePath(path) != null;
     }
 
+    public boolean IsEmpty() {
+        return json.isEmpty();
+    }
+
     public JsonWrapper Set(String path, Object obj) {
         ObjectNode parentNode = json;
         String[] args = path.split("\\.");
@@ -260,6 +283,14 @@ public class JsonWrapper implements IJsonSerializable {
     @Override
     public void SerializeInternal(JsonWrapper obj) {
 
+    }
+
+    public static JsonWrapper Parse(String str) {
+        try {
+            return new JsonWrapper(str);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static class JsonWrapperSerializer extends JsonSerializer<JsonWrapper> {

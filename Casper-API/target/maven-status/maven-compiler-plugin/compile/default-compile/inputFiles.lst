@@ -1,3 +1,10 @@
+D:\dev\Tomlyn\Casper\Casper-API\src\main\java\moe\protasis\casper\api\packages\IPackageProvider.java
+D:\dev\Tomlyn\Casper\Casper-API\src\main\java\moe\protasis\casper\api\packages\PackageManifest.java
+D:\dev\Tomlyn\Casper\Casper-API\src\main\java\moe\protasis\casper\api\packages\PackageProviderType.java
+D:\dev\Tomlyn\Casper\Casper-API\src\main\java\moe\protasis\casper\api\packages\PackageStatus.java
+D:\dev\Tomlyn\Casper\Casper-API\src\main\java\moe\protasis\casper\api\packages\RepositoryPackageStatus.java
+D:\dev\Tomlyn\Casper\Casper-API\src\main\java\moe\protasis\casper\api\plugin\IPlugin.java
+D:\dev\Tomlyn\Casper\Casper-API\src\main\java\moe\protasis\casper\Casper.java
 D:\dev\Tomlyn\Casper\Casper-API\src\main\java\moe\protasis\casper\util\IJsonSerializable.java
 D:\dev\Tomlyn\Casper\Casper-API\src\main\java\moe\protasis\casper\util\JsonUtil.java
 D:\dev\Tomlyn\Casper\Casper-API\src\main\java\moe\protasis\casper\util\JsonWrapper.java

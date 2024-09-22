@@ -1,0 +1,16 @@
+{
+  "port" : 7940,
+  "packageProvider" : "file",
+  "providers" : {
+    "file" : { },
+    "s3" : {
+      "url" : "",
+      "accessKey" : "",
+      "secretKey" : "",
+      "linkExpiration" : 60
+    },
+    "plugin" : {
+      "name" : "NameOfPluginThatProvidesPackages"
+    }
+  }
+}

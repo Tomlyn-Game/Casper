@@ -1,4 +1,4 @@
-package moe.protasis.casper.config;
+package moe.protasis.casper.services;
 
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,7 @@ import java.io.File;
 
 @Configuration
 @Slf4j
-public class JsonConfigLoader {
+public class JsonConfigService {
     @Value("classpath:config.json")
     private Resource configTemplate;
     @Autowired
@@ -41,7 +41,7 @@ public class JsonConfigLoader {
     }
 
     @Bean
-    public JsonWrapper jsonConfig() {
+    public JsonWrapper ServerConfig() {
         return config;
     }
 }
