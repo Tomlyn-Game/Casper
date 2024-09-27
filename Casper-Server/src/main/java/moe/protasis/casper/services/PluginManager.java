@@ -1,7 +1,7 @@
 package moe.protasis.casper.services;
 
 import jakarta.annotation.PostConstruct;
-import moe.protasis.casper.api.plugin.IPlugin;
+import moe.protasis.casper.api.plugin.CasperPlugin;
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ public class PluginManager {
 
     }
 
-    public IPlugin GetPlugin(String name) {
+    public CasperPlugin GetPlugin(String name) {
         throw new NotImplementedException();
     }
 }

@@ -19,7 +19,7 @@ public class FileUploadConfig {
     public MultipartConfigElement multipartConfigElement() {
         MultipartConfigFactory factory = new MultipartConfigFactory();
 
-        var size = DataSize.parse(jsonConfig.GetString("packageSizeLimit", "1GB"));
+        var size = DataSize.parse(jsonConfig.GetString("packageProvider.packageSizeLimit", "1GB"));
         factory.setMaxFileSize(size);
         factory.setMaxRequestSize(size);
 

@@ -174,6 +174,15 @@ public class JsonWrapper implements IJsonSerializable {
         }
     }
 
+    public <T> T ToObject(Class<T> clazz) {
+        try {
+            return objectMapper.treeToValue(json, clazz);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public JsonWrapper GetObject(String path) {
         JsonNode node = ResolvePath(path);
         if (node == null || !node.isObject()) return new JsonWrapper();

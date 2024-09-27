@@ -1,4 +1,4 @@
-package moe.protasis.casper.exception;
+package moe.protasis.casper.exception.api;
 
 public class NotFoundException extends APIException {
 

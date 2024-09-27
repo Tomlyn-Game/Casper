@@ -1,4 +1,4 @@
-package moe.protasis.casper.exception;
+package moe.protasis.casper.exception.api;
 
 public class NotAuthorizedException extends APIException {
     public NotAuthorizedException() {

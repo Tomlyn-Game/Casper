@@ -2,16 +2,15 @@ package moe.protasis.casper.contoller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
-import moe.protasis.casper.Casper;
+import moe.protasis.casper.annotation.RepoToken;
 import moe.protasis.casper.api.central.ITomlynAPI;
 import moe.protasis.casper.api.packages.IPackageProvider;
 import moe.protasis.casper.api.packages.PackageManifest;
 import moe.protasis.casper.api.packages.RepositoryPackageStatus;
-import moe.protasis.casper.exception.APIException;
-import moe.protasis.casper.exception.NotFoundException;
-import moe.protasis.casper.services.TomlynAPIService;
+import moe.protasis.casper.exception.api.APIException;
+import moe.protasis.casper.exception.api.NotAuthorizedException;
+import moe.protasis.casper.exception.api.NotFoundException;
 import moe.protasis.casper.util.JsonWrapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,9 +28,10 @@ import java.util.zip.ZipInputStream;
 @Slf4j
 public class PackageController {
     @GetMapping("/status")
-    private JsonWrapper GetPackageStatus(@PathVariable("packageId") String id) {
-        var packageProvider = Casper.GetPackageProvider();
-
+    private JsonWrapper GetPackageStatus(
+            @PathVariable("packageId") String id,
+            IPackageProvider packageProvider
+    ) {
         var ret = packageProvider.GetPackageStatus(id);
         if (ret == RepositoryPackageStatus.NOT_FOUND)
             throw new NotFoundException();
@@ -41,9 +41,15 @@ public class PackageController {
     }
 
     @PostMapping(value = "/upload", consumes = "multipart/form-data")
-    private JsonWrapper UploadPackage(@PathVariable("packageId") String id, @RequestParam("file") MultipartFile file) {
-        var packageProvider = Casper.GetPackageProvider();
-        var tomlynAPI = Casper.GetServerAPI();
+    private JsonWrapper UploadPackage(
+            @PathVariable("packageId") String id,
+            @RepoToken String repoToken,
+            @RequestParam("file") MultipartFile file,
+            IPackageProvider packageProvider,
+            ITomlynAPI tomlynAPI
+    ) {
+        if (!tomlynAPI.VerifyCOMMToken(repoToken, id))
+            throw new NotAuthorizedException();
 
         PackageManifest data = tomlynAPI.GetPackageManifest(id).GetObject("data", PackageManifest.class);
 

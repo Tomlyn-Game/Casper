@@ -2,7 +2,7 @@ package moe.protasis.casper;
 
 import jakarta.servlet.ServletException;
 import lombok.extern.slf4j.Slf4j;
-import moe.protasis.casper.exception.APIException;
+import moe.protasis.casper.exception.api.APIException;
 import moe.protasis.casper.response.StandardAPIResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -17,18 +17,18 @@ public class ApiExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> OnException(Exception e) {
         e.printStackTrace();
-        return ResponseEntity.status(500).body(new StandardAPIResponse(1, "server error"));
+        return ResponseEntity.status(500).body(new StandardAPIResponse(2, "server error"));
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<?> OnBadRequestException(HttpMessageNotReadableException e) {
-        return ResponseEntity.status(400).body(new StandardAPIResponse(2, "invalid request"));
+        return ResponseEntity.status(400).body(new StandardAPIResponse(7, "invalid request"));
     }
 
     @ExceptionHandler(ServletException.class)
     public ResponseEntity<?> OnServletException(ServletException e) {
         log.warn(e.getMessage());
-        return ResponseEntity.status(400).body(new StandardAPIResponse(3, "invalid request"));
+        return ResponseEntity.status(400).body(new StandardAPIResponse(8, "invalid request"));
     }
 
     @ExceptionHandler(NoHandlerFoundException.class)

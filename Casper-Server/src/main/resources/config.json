@@ -1,21 +1,54 @@
 {
     "port": 7940,
-    "packageProvider": "file",
     "apiUrl": "https://api.tomlyn.protasis.moe/",
-    "packageSizeLimit": "1GB",
 
-    "providers": {
-        "file": {
+    "info": {
+        "name": "Repository name here",
+        "address": "https://repo.example.com/",
+        "description": "Repository description here",
+        "maintainer": "SomePersonA",
+        "email": "somepersona@example.com",
+        "contact": "Discord: SomePersonA#1234",
+        "squawk": 0,
+        "fullyPublic": true,
+        "version": "1.0.0",
+        "protocol": "CHECK TOMLYN DOCS SITE FOR PROTOCOL VERSION",
+        "motd": "Welcome to the repository!"
+    },
 
-        },
-        "s3": {
-            "url": "",
-            "accessKey": "",
-            "secretKey": "",
-            "linkExpiration": 60
-        },
-        "plugin": {
-            "name": "NameOfPluginThatProvidesPackages"
+    "packageProvider": {
+        "type": "file",
+        "packageSizeLimit": "1GB",
+
+        "config": {
+            "file": {
+            },
+            "s3": {
+                "url": "",
+                "accessKey": "",
+                "secretKey": "",
+                "linkExpiration": 60
+            },
+            "plugin": {
+                "name": "NameOfPluginThatProvidesPackages"
+            }
+        }
+    },
+
+    "permissionProvider": {
+        "type": "public",
+        "config": {
+            "public": {},
+            "file": {},
+            "static": {
+                "account": ["std:read", "std:write"],
+                "package": ["std:read", "std:write"]
+            },
+            "plugin": {
+                "name": "NameOfPluginThatProvidesPermissions"
+            }
         }
     }
+
+
 }

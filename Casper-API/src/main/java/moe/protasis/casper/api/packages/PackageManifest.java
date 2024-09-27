@@ -4,11 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
+import moe.protasis.casper.api.sheet.SheetDescriptor;
+import moe.protasis.casper.api.sheet.SheetDifficulty;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Data
 @Builder
@@ -30,7 +29,8 @@ public class PackageManifest {
     private String authorRomanized;
     private String mapper;
     private List<String> tags = new ArrayList<>();
-    private float difficultyMin, difficultyMax;
     private boolean nsfw;
     private boolean test;
+
+    private Map<SheetDifficulty, SheetDescriptor> sheets = new HashMap<>();
 }
