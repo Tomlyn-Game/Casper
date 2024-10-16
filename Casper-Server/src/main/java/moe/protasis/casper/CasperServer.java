@@ -7,6 +7,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableScheduling
 public class CasperServer {
+    public static final String SERVER_BRAND = "Casper";
+
     public static void main(String[] args) {
         SpringApplication.run(CasperServer.class, args);
     }

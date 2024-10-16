@@ -1,6 +1,7 @@
 package moe.protasis.casper.contoller;
 
 import lombok.extern.slf4j.Slf4j;
+import moe.protasis.casper.CasperServer;
 import moe.protasis.casper.util.JsonWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,6 @@ public class GeneralController {
 
     @GetMapping("/info")
     private JsonWrapper GetRepoGeneralInfo() {
-        return config.GetObject("info");
+        return config.GetObject("info").Set("poweredBy", CasperServer.SERVER_BRAND);
     }
 }

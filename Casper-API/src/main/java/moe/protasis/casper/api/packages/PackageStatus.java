@@ -1,13 +1,17 @@
 package moe.protasis.casper.api.packages;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 public enum PackageStatus {
-    STANDBY,
-    REVIEW_STAGING,
-    UNDER_REVIEW,
+    WAIT,
     STAGING,
+    UNDER_REVIEW,
+    STANDBY,
     PUBLISHED,
     PARKED,
     PARKED_LOCKED,
     REJECTED_LOCKED,
-    ABNORMAL
+    ABNORMAL,
+    ABNORMAL_REUPLOAD
 }

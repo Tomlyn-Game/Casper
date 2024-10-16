@@ -28,7 +28,7 @@ public class LocalFilePackageProvider implements IPackageProvider {
 
     @Override
     public RepositoryPackageStatus GetPackageStatus(String id) {
-        return new File(packageDir + "/" + id).exists() ? RepositoryPackageStatus.RECEIVED : RepositoryPackageStatus.NOT_FOUND;
+        return new File(packageDir + "/" + id).exists() ? RepositoryPackageStatus.RECEIVED : RepositoryPackageStatus.REGISTERED;
     }
 
     @Override
